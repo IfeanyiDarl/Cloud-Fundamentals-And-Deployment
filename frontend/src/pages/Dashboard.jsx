@@ -21,7 +21,7 @@ export default function Dashboard() {
   const config = { headers: { Authorization: `Bearer ${user.token}` } };
 
   const fetchItems = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/items', config);
+    const { data } = await axios.get('http://localhost:5001/api/items', config);
     setItems(data);
   };
 
@@ -30,18 +30,18 @@ export default function Dashboard() {
   const handleCreate = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    await axios.post('http://localhost:5000/api/items', { title, content, type, priority, category, dueDate }, config);
+    await axios.post('http://localhost:5001/api/items', { title, content, type, priority, category, dueDate }, config);
     setTitle(''); setContent(''); setDueDate('');
     fetchItems();
   };
 
   const handleToggle = async (id, isCompleted) => {
-    await axios.put(`http://localhost:5000/api/items/${id}`, { isCompleted }, config);
+    await axios.put(`http://localhost:5001/api/items/${id}`, { isCompleted }, config);
     fetchItems();
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/items/${id}`, config);
+    await axios.delete(`http://localhost:5001/api/items/${id}`, config);
     fetchItems();
   };
 
